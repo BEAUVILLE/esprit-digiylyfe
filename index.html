@@ -399,7 +399,7 @@
   </div>
 
   <!-- BOUTONS -->
-  <button class="play-btn" id="playBtn" type="button" onclick="lancerLecture()">▶ Écouter</button>
+  <button class="play-btn" id="playBtn" type="button" onclick="lancerEcoute()">▶ Écouter</button>
   <button class="replay" type="button" onclick="relancerReel()">↺ Revoir</button>
 
 </div>
@@ -418,8 +418,13 @@ const scriptAudio = [
   { delay: 16200, texte: "DIGIYLYFE point com." }
 ];
 
-let started = false;
+let ecouteActive = false;
 let timers = [];
+
+function clearTimers() {
+  timers.forEach(timer => clearTimeout(timer));
+  timers = [];
+}
 
 function getVoixFR() {
   const voices = window.speechSynthesis.getVoices();
@@ -428,68 +433,119 @@ function getVoixFR() {
     voices.find(v => v.lang === "fr-FR" && /thomas|pierre|nicolas|paul|male/i.test(v.name)) ||
     voices.find(v => v.lang === "fr-FR") ||
     voices.find(v => v.lang && v.lang.startsWith("fr")) ||
-    voices[0]
+    voices[0] ||
+    null
   );
 }
 
 function parler(texte) {
-  const utterance = new SpeechSynthesisUtterance(texte);
-  const voix = getVoixFR();
+  try {
+    const utterance = new SpeechSynthesisUtterance(texte);
+    const voix = getVoixFR();
 
-  if (voix) {
-    utterance.voice = voix;
+    if (voix) {
+      utterance.voice = voix;
+    }
+
+    utterance.lang = "fr-FR";
+    utterance.rate = 0.82;
+    utterance.pitch = 0.88;
+    utterance.volume = 1;
+
+    window.speechSynthesis.resume();
+    window.speechSynthesis.speak(utterance);
+  } catch (error) {
+    console.warn("[DIGIY AUDIO] Erreur écoute :", error);
+  }
+}
+
+function reveillerAudio() {
+  try {
+    window.speechSynthesis.cancel();
+
+    const test = new SpeechSynthesisUtterance(" ");
+    test.lang = "fr-FR";
+    test.volume = 0;
+    test.rate = 1;
+
+    window.speechSynthesis.speak(test);
+    window.speechSynthesis.resume();
+  } catch (error) {
+    console.warn("[DIGIY AUDIO] Réveil impossible :", error);
+  }
+}
+
+function lancerEcoute() {
+  const btn = document.getElementById("playBtn");
+
+  if (!("speechSynthesis" in window)) {
+    btn.textContent = "Son indisponible";
+    return;
   }
 
-  utterance.lang = "fr-FR";
-  utterance.rate = 0.82;
-  utterance.pitch = 0.88;
-  utterance.volume = 1;
+  if (ecouteActive) {
+    window.speechSynthesis.cancel();
+    clearTimers();
+    ecouteActive = false;
+    btn.textContent = "▶ Écouter";
+    btn.classList.remove("playing", "done");
+    return;
+  }
 
-  window.speechSynthesis.speak(utterance);
-}
+  ecouteActive = true;
 
-function clearTimers() {
-  timers.forEach(timer => clearTimeout(timer));
-  timers = [];
-}
-
-function lancerLecture() {
-  if (started) return;
-
-  started = true;
-
-  const btn = document.getElementById("playBtn");
-  btn.textContent = "🔊 Lecture…";
+  btn.textContent = "🔊 Écoute…";
   btn.classList.add("playing");
   btn.classList.remove("done");
 
-  window.speechSynthesis.cancel();
+  reveillerAudio();
   clearTimers();
 
-  scriptAudio.forEach(item => {
-    const timer = setTimeout(() => parler(item.texte), item.delay);
-    timers.push(timer);
-  });
+  const startTimer = setTimeout(() => {
+    window.speechSynthesis.cancel();
 
-  const endTimer = setTimeout(() => {
-    btn.textContent = "✓ Réécouter";
-    btn.classList.remove("playing");
-    btn.classList.add("done");
-    started = false;
-  }, 18800);
+    scriptAudio.forEach(item => {
+      const timer = setTimeout(() => {
+        window.speechSynthesis.resume();
+        parler(item.texte);
+      }, item.delay);
 
-  timers.push(endTimer);
+      timers.push(timer);
+    });
+
+    const endTimer = setTimeout(() => {
+      btn.textContent = "↺ Réécouter";
+      btn.classList.remove("playing");
+      btn.classList.add("done");
+      ecouteActive = false;
+    }, 18800);
+
+    timers.push(endTimer);
+  }, 180);
+
+  timers.push(startTimer);
 }
 
 function relancerReel() {
-  window.speechSynthesis.cancel();
+  try {
+    window.speechSynthesis.cancel();
+  } catch (error) {}
+
   clearTimers();
   location.reload();
 }
 
-window.speechSynthesis.onvoiceschanged = () => {
-  getVoixFR();
-};
+window.addEventListener("beforeunload", () => {
+  try {
+    window.speechSynthesis.cancel();
+  } catch (error) {}
+});
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    getVoixFR();
+  };
+}
 </script>
 
 </body>
