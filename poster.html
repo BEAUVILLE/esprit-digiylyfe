@@ -1,726 +1,753 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DIGIYLYFE — Le Bonheur Business Est Là Ici</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;800;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-  min-height: 100vh;
-  background: #031407;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 18px;
-  font-family: "Montserrat", sans-serif;
-}
-
-.poster {
-  width: 540px;
-  min-height: 960px;
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 30%, rgba(255, 205, 80, 0.12), transparent 28%),
-    radial-gradient(circle at 15% 42%, rgba(0, 0, 0, 0.35), transparent 32%),
-    radial-gradient(circle at 85% 42%, rgba(0, 0, 0, 0.35), transparent 32%),
-    linear-gradient(180deg, #031407 0%, #073018 38%, #041c0c 100%);
-  color: #fff;
-  box-shadow: 0 0 70px rgba(0,0,0,0.75);
-}
-
-/* ambiance */
-.poster::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.45)),
-    radial-gradient(ellipse at 20% 48%, rgba(255,195,70,0.08), transparent 36%),
-    radial-gradient(ellipse at 80% 48%, rgba(255,195,70,0.08), transparent 36%);
-  z-index: 0;
-}
-
-.poster::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 355px;
-  height: 190px;
-  background:
-    radial-gradient(ellipse at 15% 100%, rgba(0,0,0,0.65), transparent 55%),
-    radial-gradient(ellipse at 85% 100%, rgba(0,0,0,0.65), transparent 55%),
-    linear-gradient(to bottom, transparent, rgba(1,16,6,0.95));
-  z-index: 1;
-}
-
-.content {
-  position: relative;
-  z-index: 2;
-  padding: 18px 28px 22px;
-}
-
-/* top */
-.topline {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  justify-content: center;
-  color: #e2bd45;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.topline::before,
-.topline::after {
-  content: "";
-  height: 1px;
-  width: 120px;
-  background: linear-gradient(to right, transparent, #c9a227, transparent);
-}
-
-.headline {
-  text-align: center;
-  font-family: "Bebas Neue", sans-serif;
-  line-height: 0.9;
-  text-transform: uppercase;
-}
-
-.headline span {
-  display: block;
-  font-size: 82px;
-  letter-spacing: 2px;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.45);
-}
-
-.headline .gold {
-  color: #d7a927;
-  background: linear-gradient(180deg, #ffe783 0%, #d7a927 45%, #8b5c12 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.byline {
-  margin-top: 2px;
-  text-align: center;
-  font-weight: 900;
-  font-size: 16px;
-  letter-spacing: 5px;
-}
-
-.byline strong {
-  color: #d7a927;
-}
-
-/* hero */
-.hero {
-  position: relative;
-  height: 320px;
-  margin-top: 8px;
-}
-
-.place {
-  position: absolute;
-  left: 4px;
-  bottom: 42px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: rgba(255,255,255,0.92);
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.5;
-}
-
-.pin {
-  font-size: 34px;
-  color: #d7a927;
-}
-
-.signature {
-  position: absolute;
-  right: 2px;
-  bottom: 34px;
-  max-width: 150px;
-  font-family: "Dancing Script", cursive;
-  color: rgba(255,255,255,0.85);
-  font-size: 20px;
-  line-height: 1.18;
-  transform: rotate(-5deg);
-}
-
-.flag {
-  position: absolute;
-  right: 24px;
-  top: 92px;
-  width: 82px;
-  height: 58px;
-  display: flex;
-  overflow: hidden;
-  border-radius: 2px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-}
-
-.flag::before {
-  content: "";
-  position: absolute;
-  left: -8px;
-  top: -50px;
-  width: 3px;
-  height: 130px;
-  background: #c9a227;
-}
-
-.fg { flex: 1; background: #00853f; }
-.fy {
-  flex: 1;
-  background: #fdef42;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #00853f;
-  font-size: 17px;
-}
-.fr { flex: 1; background: #e31b23; }
-
-/* medal */
-.medal {
-  position: absolute;
-  left: 50%;
-  top: 20px;
-  width: 250px;
-  height: 250px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background:
-    conic-gradient(
-      #8c5d12,
-      #fbe36f,
-      #c99a22,
-      #6d4309,
-      #e9c653,
-      #9a6b18,
-      #fbe36f,
-      #8c5d12
-    );
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow:
-    0 0 35px rgba(255,215,80,0.32),
-    0 16px 36px rgba(0,0,0,0.55);
-}
-
-.medal-inner {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 42% 34%, #0b4a25, #031407 74%);
-  border: 2px solid rgba(255,226,120,0.35);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.medal-svg {
-  position: absolute;
-  inset: 0;
-}
-
-.infinity {
-  font-size: 56px;
-  line-height: 1;
-  color: #e4bd3d;
-  text-shadow: 0 0 14px rgba(255,220,90,0.5);
-}
-
-.medal-name {
-  font-family: "Bebas Neue", sans-serif;
-  color: #e4bd3d;
-  font-size: 43px;
-  letter-spacing: 3px;
-  margin-top: 8px;
-}
-
-.globe {
-  margin-top: 8px;
-  font-size: 43px;
-}
-
-.pedestal {
-  position: absolute;
-  left: 50%;
-  bottom: 12px;
-  width: 170px;
-  height: 24px;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, #f0c95b, #7b4f0b);
-  border-radius: 50% / 40%;
-  box-shadow: 0 0 22px rgba(255,215,90,0.45);
-}
-
-/* sections */
-.section-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #d7a927;
-  font-size: 20px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  justify-content: center;
-  text-transform: uppercase;
-  margin: 12px 0 12px;
-}
-
-.section-title::before,
-.section-title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, #c9a227, transparent);
-}
-
-.services {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 7px;
-  margin-bottom: 18px;
-}
-
-.card {
-  min-height: 104px;
-  border: 1px solid rgba(235,199,89,0.55);
-  border-radius: 12px;
-  background: rgba(0,0,0,0.22);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 9px 5px 7px;
-  text-align: center;
-}
-
-.icon {
-  font-size: 33px;
-  margin-bottom: 5px;
-  color: #d7a927;
-}
-
-.card-title {
-  font-size: 10px;
-  color: #fff;
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-}
-
-.card-sub {
-  color: rgba(255,255,255,0.82);
-  font-size: 8px;
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-.eng-title {
-  text-align: center;
-  color: #d7a927;
-  font-size: 21px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin: 6px 0 9px;
-}
-
-.engagement {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border: 1px solid rgba(235,199,89,0.45);
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 18px;
-  background: rgba(0,0,0,0.23);
-}
-
-.eng {
-  min-height: 64px;
-  padding: 9px 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border-right: 1px solid rgba(235,199,89,0.35);
-}
-
-.eng:last-child {
-  border-right: none;
-}
-
-.eng .eicon {
-  font-size: 26px;
-  color: #d7a927;
-}
-
-.eng .etxt {
-  font-size: 8.5px;
-  line-height: 1.25;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-/* cta */
-.cta {
-  text-align: center;
-}
-
-.cta-title {
-  font-size: 18px;
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.url-zone {
-  position: relative;
-  min-height: 96px;
-  border: 2px solid rgba(220,179,49,0.9);
-  border-radius: 14px;
-  background:
-    linear-gradient(90deg, rgba(215,169,39,0.16), rgba(0,70,28,0.5)),
-    #073018;
-  display: flex;
-  align-items: center;
-  padding: 16px 118px 16px 18px;
-  box-shadow: 0 0 22px rgba(215,169,39,0.25);
-}
-
-.url-icon {
-  font-size: 42px;
-  margin-right: 12px;
-  color: #d7a927;
-}
-
-.url-text {
-  color: #fff;
-  font-size: 26px;
-  font-weight: 900;
-  text-decoration: none;
-  letter-spacing: -0.8px;
-  white-space: nowrap;
-}
-
-.qr-wrap {
-  position: absolute;
-  right: 16px;
-  top: -14px;
-  width: 104px;
-  height: 104px;
-  background: #fff;
-  border-radius: 3px;
-  padding: 9px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
-}
-
-#qr-canvas {
-  width: 86px;
-  height: 86px;
-}
-
-#qr-canvas canvas,
-#qr-canvas img {
-  width: 86px !important;
-  height: 86px !important;
-}
-
-.scan {
-  position: absolute;
-  right: 19px;
-  bottom: -2px;
-  color: #d7a927;
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.footer {
-  margin-top: 14px;
-  text-align: center;
-}
-
-.footer-main {
-  font-size: 14px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.footer-main span {
-  color: #d7a927;
-}
-
-.footer-inf {
-  color: #d7a927;
-  font-size: 21px;
-  margin-top: 4px;
-}
-
-.footer-small {
-  margin-top: 2px;
-  color: rgba(255,255,255,0.38);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-}
-
-/* impression propre */
-@media print {
   body {
-    background: #fff;
-    padding: 0;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
   }
 
   .poster {
-    width: 100vw;
-    min-height: 100vh;
-    box-shadow: none;
-  }
-}
-
-/* mobile */
-@media (max-width: 620px) {
-  body {
-    padding: 0;
+    width: 540px;
+    min-height: 960px;
+    background: #062912;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
   }
 
-  .poster {
-    width: 100vw;
-    min-height: 100vh;
+  /* === BG atmosphere === */
+  .bg-scene {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 40% at 20% 35%, rgba(180,120,0,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(10,80,30,0.4) 0%, transparent 60%),
+      linear-gradient(180deg, #041a0c 0%, #073318 30%, #08401c 55%, #05280f 100%);
+    z-index: 0;
   }
 
+  /* Subtle palm silhouettes */
+  .bg-palms {
+    position: absolute;
+    bottom: 52%;
+    left: 0;
+    right: 0;
+    height: 280px;
+    background:
+      radial-gradient(ellipse 40% 80% at 8% 100%, rgba(3,18,7,0.9) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 70% at 18% 90%, rgba(3,18,7,0.7) 0%, transparent 55%);
+    z-index: 1;
+  }
+
+  /* Water shimmer */
+  .bg-water {
+    position: absolute;
+    bottom: 37%;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(180deg, transparent 0%, rgba(4, 60, 30, 0.5) 40%, rgba(2,40,18,0.8) 100%);
+    z-index: 1;
+  }
+
+  /* === All content above bg === */
   .content {
-    padding: 16px 16px 22px;
+    position: relative;
+    z-index: 2;
+    padding: 0 0 24px;
   }
 
-  .headline span {
-    font-size: 64px;
+  /* ===== TOP SECTION ===== */
+  .top-bar {
+    text-align: center;
+    padding: 18px 20px 0;
+    letter-spacing: 3px;
+    font-size: 10px;
+    color: rgba(201,162,39,0.85);
+    font-weight: 700;
+    position: relative;
   }
 
-  .hero {
-    height: 300px;
+  .top-bar::before, .top-bar::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 28%;
+    height: 0.5px;
+    background: rgba(201,162,39,0.4);
+  }
+  .top-bar::before { left: 16px; transform: translateY(-50%); }
+  .top-bar::after { right: 16px; transform: translateY(-50%); }
+
+  .headline {
+    text-align: center;
+    padding: 8px 16px 0;
+    line-height: 0.92;
   }
 
-  .medal {
-    width: 220px;
-    height: 220px;
+  .headline .line1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 82px;
+    color: #fff;
+    display: block;
+    letter-spacing: 2px;
+  }
+
+  .headline .line2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 82px;
+    color: #c9a227;
+    display: block;
+    letter-spacing: 2px;
+  }
+
+  .headline .line3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 82px;
+    color: #fff;
+    display: block;
+    letter-spacing: 1px;
+  }
+
+  .by-line {
+    text-align: center;
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .by-line span {
+    color: #c9a227;
+    font-size: 16px;
+  }
+
+  /* Decorative separator */
+  .sep {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 30px;
+    margin: 10px 0 6px;
+  }
+  .sep-line { flex: 1; height: 0.5px; background: rgba(201,162,39,0.35); }
+  .sep-dot { width: 4px; height: 4px; background: #c9a227; transform: rotate(45deg); flex-shrink: 0; }
+
+  /* ===== MEDAL / HERO ===== */
+  .hero-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    position: relative;
+    margin-top: 4px;
+  }
+
+  .location-badge {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .loc-pin {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .loc-text {
+    font-size: 9.5px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #fff;
+  }
+
+  .flag-wrap {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-55%);
+    width: 52px;
+  }
+
+  .flag {
+    width: 52px;
+    height: 35px;
+    display: flex;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .flag-g { flex: 1; background: #00853F; }
+  .flag-y { flex: 1; background: #FDEF42; display: flex; align-items: center; justify-content: center; }
+  .flag-r { flex: 1; background: #E31B23; }
+  .flag-star { color: #00853F; font-size: 12px; line-height: 1; }
+  .flag-pole { width: 2px; height: 44px; background: rgba(201,162,39,0.6); margin: 0 auto; }
+
+  /* Medal */
+  .medal-wrap {
+    width: 200px;
+    height: 200px;
+    position: relative;
+  }
+
+  .medal-outer {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #b8881e 0deg, #e8c84a 30deg, #c9a227 60deg,
+      #8a6010 90deg, #c9a227 120deg, #e8c84a 150deg,
+      #b8881e 180deg, #e8c84a 210deg, #c9a227 240deg,
+      #8a6010 270deg, #c9a227 300deg, #e8c84a 330deg, #b8881e 360deg
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 0 0 2px rgba(255,220,100,0.3);
+    position: relative;
   }
 
   .medal-inner {
     width: 176px;
     height: 176px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #0c4020, #041a0a 70%);
+    border: 1.5px solid rgba(201,162,39,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
 
+  /* Ring text around medal */
+  .medal-ring-text {
+    position: absolute;
+    top: 0; left: 0;
+    width: 200px;
+    height: 200px;
+    z-index: 3;
+  }
+
+  .infinity {
+    font-size: 40px;
+    color: #c9a227;
+    line-height: 1;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 0 6px rgba(201,162,39,0.4));
+  }
+
+  .medal-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: #c9a227;
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+
+  .medal-globe {
+    font-size: 28px;
+    margin-top: 6px;
+    filter: drop-shadow(0 0 4px rgba(201,162,39,0.3));
+  }
+
+  /* Globe with Africa */
+  .globe-svg {
+    width: 38px;
+    height: 38px;
+    margin-top: 4px;
+  }
+
+  /* Tagline */
+  .tagline {
+    position: absolute;
+    right: 14px;
+    bottom: -10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    text-align: right;
+    line-height: 1.4;
+    max-width: 110px;
+  }
+
+  /* Pedestal */
+  .pedestal {
+    text-align: center;
+    margin-top: -4px;
+    padding: 0 100px;
+  }
+  .ped-top { height: 6px; background: linear-gradient(90deg, transparent, #c9a227, transparent); border-radius: 2px; }
+  .ped-mid { height: 10px; background: linear-gradient(180deg, #c9a227 0%, #8a6010 100%); border-radius: 0 0 4px 4px; }
+
+  /* ===== MIDDLE SECTION ===== */
+  .section-label {
+    text-align: center;
+    margin: 16px 20px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label-line { flex: 1; height: 0.5px; background: rgba(201,162,39,0.4); }
+  .section-label-text {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #c9a227;
+    white-space: nowrap;
+  }
+
+  /* Services grid */
   .services {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 0 16px;
+    margin-bottom: 14px;
   }
 
-  .engagement {
+  .service-card {
+    border: 1px solid rgba(201,162,39,0.3);
+    border-radius: 8px;
+    padding: 10px 6px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: rgba(201,162,39,0.04);
+  }
+
+  .service-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .service-title {
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #c9a227;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .service-sub {
+    font-size: 7.5px;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  /* ===== ENGAGEMENT ===== */
+  .engagement-title {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #c9a227;
+    padding: 0 20px 8px;
+    text-transform: uppercase;
+  }
+
+  .engagement-grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 16px;
+    margin-bottom: 14px;
   }
 
-  .url-zone {
-    padding-right: 110px;
+  .eng-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(201,162,39,0.25);
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: rgba(201,162,39,0.04);
   }
+
+  .eng-icon { font-size: 18px; flex-shrink: 0; }
+
+  .eng-text {
+    font-size: 8px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  /* ===== BOTTOM SECTION ===== */
+  .bottom-cta {
+    padding: 0 16px;
+    margin-top: 4px;
+  }
+
+  .cta-prompt {
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* QR + URL zone */
+  .qr-zone {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    background: rgba(201,162,39,0.07);
+    border: 1px solid rgba(201,162,39,0.3);
+    border-radius: 12px;
+    padding: 12px 14px;
+    position: relative;
+  }
+
+  .url-block {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .globe-icon { font-size: 22px; flex-shrink: 0; }
 
   .url-text {
-    font-size: 21px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.3px;
   }
-}
+
+  /* ⬅️ MICRO-BOOST: Trigger phrase */
+  .scan-trigger {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .trigger-phrase {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    text-align: right;
+    line-height: 1.3;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .trigger-arrow {
+    color: #c9a227;
+    font-size: 14px;
+    animation: bounce-right 1.4s ease-in-out infinite;
+  }
+
+  @keyframes bounce-right {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+  }
+
+  /* QR code block */
+  .qr-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .qr-container {
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid rgba(201,162,39,0.5);
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .qr-container canvas, .qr-container img {
+    width: 74px !important;
+    height: 74px !important;
+  }
+
+  .scan-label {
+    font-size: 7.5px;
+    font-weight: 600;
+    color: rgba(201,162,39,0.6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 14px 20px 4px;
+  }
+
+  .footer-tagline {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+  }
+
+  .footer-tagline span { color: #c9a227; }
+
+  .footer-infinity {
+    font-size: 18px;
+    color: #c9a227;
+    margin: 4px 0 2px;
+    opacity: 0.8;
+  }
+
+  .footer-pillars {
+    font-size: 8px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
 </style>
 </head>
-
 <body>
-
 <div class="poster">
-  <div class="content">
+  <div class="bg-scene"></div>
+  <div class="bg-palms"></div>
+  <div class="bg-water"></div>
 
-    <div class="topline">Notre promesse</div>
+  <div class="content">
+    <!-- TOP -->
+    <div class="top-bar">· NOTRE PROMESSE ·</div>
 
     <div class="headline">
-      <span>Le bonheur</span>
-      <span class="gold">Business</span>
-      <span>Est là <span class="gold">ici.</span></span>
+      <span class="line1">LE BONHEUR</span>
+      <span class="line2">BUSINESS</span>
+      <span class="line3">EST LÀ ICI.</span>
     </div>
 
-    <div class="byline">BY <strong>DIGIYLYFE</strong></div>
+    <div class="by-line">BY <span>DIGIYLYFE</span></div>
 
-    <div class="hero">
+    <div class="sep">
+      <div class="sep-line"></div>
+      <div class="sep-dot"></div>
+      <div class="sep-line"></div>
+    </div>
 
-      <div class="place">
-        <div class="pin">⌖</div>
-        <div>
-          Saly • Mbour<br>
-          Petite Côte • Sénégal
-        </div>
+    <!-- HERO ZONE -->
+    <div class="hero-zone">
+
+      <!-- Location -->
+      <div class="location-badge">
+        <svg class="loc-pin" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="rgba(201,162,39,0.8)"/>
+          <circle cx="12" cy="9" r="2.5" fill="#041a0a"/>
+        </svg>
+        <div class="loc-text">Saly • Mbour<br>Petite Côte • Sénégal</div>
       </div>
 
-      <div class="flag">
-        <div class="fg"></div>
-        <div class="fy">★</div>
-        <div class="fr"></div>
-      </div>
-
-      <div class="signature">
-        Territoire vivant,<br>
-        opportunités réelles.
-      </div>
-
-      <div class="medal">
-        <svg class="medal-svg" viewBox="0 0 250 250">
+      <!-- Medal -->
+      <div class="medal-wrap">
+        <!-- Ring text via SVG -->
+        <svg class="medal-ring-text" viewBox="0 0 200 200">
           <defs>
-            <path id="arcTop" d="M 30 125 A 95 95 0 1 1 220 125" />
-            <path id="arcBottom" d="M 30 125 A 95 95 0 0 0 220 125" />
+            <path id="top-arc" d="M 20,100 A 80,80 0 1,1 180,100"/>
+            <path id="bot-arc" d="M 20,100 A 80,80 0 0,0 180,100"/>
           </defs>
-
-          <text font-size="11" font-family="Montserrat" font-weight="900" fill="#031407" letter-spacing="1">
-            <textPath href="#arcTop" startOffset="6%">
-              L'AFRIQUE ENRACINÉE, CONNECTÉE AU MONDE
-            </textPath>
+          <text font-size="8.5" font-weight="700" fill="#c9a227" font-family="Montserrat,sans-serif" letter-spacing="2">
+            <textPath href="#top-arc" startOffset="3%">L'AFRIQUE ENRACINÉE, CONNECTÉE AU MONDE</textPath>
           </text>
-
-          <text font-size="8.7" font-family="Montserrat" font-weight="900" fill="#031407" letter-spacing="0.8">
-            <textPath href="#arcBottom" startOffset="2%">
-              ZÉRO COMMISSION • 100% INDÉPENDANCE • LA MAIN DANS LA MAIN
-            </textPath>
+          <text font-size="8" font-weight="700" fill="rgba(201,162,39,0.8)" font-family="Montserrat,sans-serif" letter-spacing="1.5">
+            <textPath href="#bot-arc" startOffset="2%">ZÉRO COMMISSION • 100% INDÉPENDANCE • LA MAIN DANS LA MAIN</textPath>
           </text>
         </svg>
 
-        <div class="medal-inner">
-          <div class="infinity">∞</div>
-          <div class="medal-name">DIGIYLYFE</div>
-          <div class="globe">🌍</div>
+        <div class="medal-outer">
+          <div class="medal-inner">
+            <div class="infinity">∞</div>
+            <div class="medal-name">DIGIYLYFE</div>
+            <!-- Globe SVG -->
+            <svg class="globe-svg" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="gg" cx="40%" cy="35%">
+                  <stop offset="0%" stop-color="#c9a227"/>
+                  <stop offset="100%" stop-color="#5a3d00"/>
+                </radialGradient>
+              </defs>
+              <circle cx="20" cy="20" r="18" fill="url(#gg)" opacity="0.9"/>
+              <ellipse cx="20" cy="20" rx="7" ry="18" fill="none" stroke="rgba(4,26,10,0.5)" stroke-width="1"/>
+              <line x1="2" y1="20" x2="38" y2="20" stroke="rgba(4,26,10,0.4)" stroke-width="0.8"/>
+              <line x1="4" y1="13" x2="36" y2="13" stroke="rgba(4,26,10,0.3)" stroke-width="0.6"/>
+              <line x1="4" y1="27" x2="36" y2="27" stroke="rgba(4,26,10,0.3)" stroke-width="0.6"/>
+              <!-- Africa blob -->
+              <path d="M 18,11 Q 24,13 23,18 Q 25,22 22,27 Q 18,30 16,26 Q 13,22 15,16 Z" fill="rgba(4,26,10,0.7)"/>
+            </svg>
+          </div>
         </div>
       </div>
 
-      <div class="pedestal"></div>
+      <!-- Flag -->
+      <div class="flag-wrap">
+        <div class="flag-pole"></div>
+        <div class="flag">
+          <div class="flag-g"></div>
+          <div class="flag-y"><span class="flag-star">★</span></div>
+          <div class="flag-r"></div>
+        </div>
+      </div>
+
+      <!-- Tagline -->
+      <div class="tagline">Territoire vivant,<br>opportunités réelles.</div>
     </div>
 
-    <div class="section-title">Trouvez, réservez, développez</div>
+    <!-- Pedestal -->
+    <div class="pedestal">
+      <div class="ped-top"></div>
+      <div class="ped-mid"></div>
+    </div>
+
+    <!-- TROUVEZ section -->
+    <div class="section-label">
+      <div class="section-label-line"></div>
+      <div class="section-label-text">· TROUVEZ, RÉSERVEZ, DÉVELOPPEZ ·</div>
+      <div class="section-label-line"></div>
+    </div>
 
     <div class="services">
-      <div class="card">
-        <div class="icon">🚗</div>
-        <div class="card-title">Chauffeur</div>
-        <div class="card-sub">Taxi, VTC<br>Transfert</div>
+      <div class="service-card">
+        <div class="service-icon">🚗</div>
+        <div class="service-title">Chauffeur</div>
+        <div class="service-sub">Taxi, VTC<br>Transfert</div>
       </div>
-
-      <div class="card">
-        <div class="icon">🏠</div>
-        <div class="card-title">Logement</div>
-        <div class="card-sub">Locations<br>Maisons, Apparts</div>
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <div class="service-title">Logement</div>
+        <div class="service-sub">Locations<br>Maisons, Apparts</div>
       </div>
-
-      <div class="card">
-        <div class="icon">📅</div>
-        <div class="card-title">Réservation</div>
-        <div class="card-sub">Restaurants<br>Activités<br>Services</div>
+      <div class="service-card">
+        <div class="service-icon">📅</div>
+        <div class="service-title">Réservation</div>
+        <div class="service-sub">Restaurants, Activités<br>Services</div>
       </div>
-
-      <div class="card">
-        <div class="icon">👷</div>
-        <div class="card-title">Artisans</div>
-        <div class="card-sub">Plombier<br>Électricien<br>Maçon, Guide…</div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <div class="service-title">Artisans</div>
+        <div class="service-sub">Plombier, Électricien<br>Maçon, Guide…</div>
       </div>
-
-      <div class="card">
-        <div class="icon">🛍️</div>
-        <div class="card-title">Boutiques</div>
-        <div class="card-sub">Produits locaux<br>et plus</div>
+      <div class="service-card">
+        <div class="service-icon">🛍️</div>
+        <div class="service-title">Boutiques</div>
+        <div class="service-sub">Produits locaux<br>et plus</div>
       </div>
-
-      <div class="card">
-        <div class="icon">💼</div>
-        <div class="card-title">Emploi</div>
-        <div class="card-sub">Offres, talents<br>opportunités</div>
+      <div class="service-card">
+        <div class="service-icon">💼</div>
+        <div class="service-title">Emploi</div>
+        <div class="service-sub">Offres, Talents<br>Opportunités</div>
       </div>
     </div>
 
-    <div class="eng-title">Notre engagement, ton avantage</div>
+    <!-- ENGAGEMENT -->
+    <div class="engagement-title">Notre Engagement, Ton Avantage</div>
 
-    <div class="engagement">
-      <div class="eng">
-        <div class="eicon">🛡️</div>
-        <div class="etxt">Sécurité<br>des échanges</div>
+    <div class="engagement-grid">
+      <div class="eng-item">
+        <div class="eng-icon">🛡️</div>
+        <div class="eng-text">Sécurité<br>des échanges</div>
       </div>
-
-      <div class="eng">
-        <div class="eicon">🎧</div>
-        <div class="etxt">Support<br>local</div>
+      <div class="eng-item">
+        <div class="eng-icon">🎧</div>
+        <div class="eng-text">Support<br>local</div>
       </div>
-
-      <div class="eng">
-        <div class="eicon">📍</div>
-        <div class="etxt">Ancré en<br>Petite Côte</div>
+      <div class="eng-item">
+        <div class="eng-icon">📍</div>
+        <div class="eng-text">Ancré en<br>Petite Côte</div>
       </div>
-
-      <div class="eng">
-        <div class="eicon">⭐</div>
-        <div class="etxt">0% comm.<br>100% toi</div>
+      <div class="eng-item">
+        <div class="eng-icon">⭐</div>
+        <div class="eng-text">0 % comm.<br>100 % toi</div>
       </div>
     </div>
 
-    <div class="cta">
-      <div class="cta-title">Accédez maintenant à l’écosystème</div>
+    <!-- BOTTOM CTA -->
+    <div class="bottom-cta">
+      <div class="cta-prompt">· Accédez maintenant à l'écosystème ·</div>
 
-      <div class="url-zone">
-        <div class="url-icon">🌐</div>
-        <a class="url-text" href="https://digiylyfe.com" target="_blank" rel="noopener">
-          https://digiylyfe.com
-        </a>
-
-        <div class="qr-wrap">
-          <div id="qr-canvas"></div>
+      <!-- Phrases déclencheur pleine largeur -->
+      <div style="padding:6px 4px 8px;">
+        <div style="font-size:13px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:3px;">Tu cherches ou tu travailles ?</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:13px;font-weight:900;color:#c9a227;letter-spacing:0.5px;">Trouve en 10 secondes.</span>
+          <span style="color:#c9a227;font-size:16px;">→</span>
         </div>
+      </div>
 
-        <div class="scan">Scannez-moi</div>
+      <div class="qr-zone" style="align-items:center;">
+        <div class="url-block">
+          <div class="globe-icon">🌐</div>
+          <a href="https://digiylyfe.com" target="_blank" rel="noopener" class="url-text" style="text-decoration:none;color:#fff;cursor:pointer;">digiylyfe.com</a>
+        </div>
+        <div class="qr-block">
+          <div class="qr-container" id="qr-canvas"></div>
+          <div class="scan-label">scannez-moi</div>
+        </div>
       </div>
     </div>
 
+    <!-- FOOTER -->
     <div class="footer">
-      <div class="footer-main">
-        L’Afrique enracinée, <span>connectée au monde.</span>
+      <div class="footer-tagline">
+        <span>L'Afrique enracinée,</span> connectée au monde.
       </div>
-      <div class="footer-inf">∞</div>
-      <div class="footer-small">Vision • Liberté • Impact</div>
+      <div class="footer-infinity">∞</div>
+      <div class="footer-pillars">Vision &nbsp;•&nbsp; Liberté &nbsp;•&nbsp; Impact</div>
     </div>
-
   </div>
 </div>
 
 <script>
-new QRCode(document.getElementById("qr-canvas"), {
-  text: "https://digiylyfe.com",
-  width: 86,
-  height: 86,
-  colorDark: "#043818",
-  colorLight: "#ffffff",
-  correctLevel: QRCode.CorrectLevel.H
-});
+  // Generate real QR code for digiylyfe.com
+  new QRCode(document.getElementById('qr-canvas'), {
+    text: 'https://digiylyfe.com',
+    width: 74,
+    height: 74,
+    colorDark: '#041a0a',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
 </script>
-
 </body>
 </html>
