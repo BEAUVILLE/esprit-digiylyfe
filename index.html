@@ -243,6 +243,89 @@
   </div>
 
   <button class="replay" onclick="location.reload()">↺ Revoir</button>
+  <button class="play-btn" id="playBtn" onclick="lancerLecture()">▶ Écouter</button>
 </div>
+
+<style>
+  .play-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: rgba(197,160,50,0.2);
+    border: 1px solid #c9a84c;
+    color: #f5d98a;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    z-index: 10;
+    transition: background 0.3s;
+    font-family: 'Courier New', monospace;
+  }
+  .play-btn:hover { background: rgba(197,160,50,0.4); }
+  .play-btn.playing { background: rgba(197,160,50,0.35); color: #fff; }
+</style>
+
+<script>
+const script = [
+  { delay: 400,   texte: "Saly. Petite Côte. Sénégal." },
+  { delay: 2000,  texte: "Un loueur et un chauffeur m'ont dit la même chose…" },
+  { delay: 3600,  texte: "Je travaille pour une plateforme depuis des mois. Je n'ai rien mis de côté." },
+  { delay: 5200,  texte: "Alors j'ai construit quelque chose pour eux." },
+  { delay: 6800,  texte: "DIGIYLYFE DRIVER. DIGIYLYFE LOC. Zéro commission. Un abonnement fixe. Cent pour cent pour toi." },
+  { delay: 8400,  texte: "Ce que tu gagnes, c'est à toi. Pas à une plateforme." },
+  { delay: 10000, texte: "De Saly à Sarlat. Pierre par pierre." },
+  { delay: 11600, texte: "digiylyfe point com" },
+];
+
+let started = false;
+
+function lancerLecture() {
+  if (started) return;
+  started = true;
+  const btn = document.getElementById('playBtn');
+  btn.textContent = '🔊 Lecture…';
+  btn.classList.add('playing');
+  window.speechSynthesis.cancel();
+
+  function getVoixFR() {
+    const voices = window.speechSynthesis.getVoices();
+    return (
+      voices.find(v => v.lang === 'fr-FR' && /thomas|amélie|pierre|nicolas/i.test(v.name)) ||
+      voices.find(v => v.lang === 'fr-FR') ||
+      voices.find(v => v.lang.startsWith('fr')) ||
+      voices[0]
+    );
+  }
+
+  function lireLigne(texte) {
+    const u = new SpeechSynthesisUtterance(texte);
+    u.lang = 'fr-FR';
+    u.rate = 0.85;
+    u.pitch = 0.95;
+    u.volume = 1;
+    const v = getVoixFR();
+    if (v) u.voice = v;
+    window.speechSynthesis.speak(u);
+  }
+
+  function demarrer() {
+    script.forEach(({ delay, texte }) => setTimeout(() => lireLigne(texte), delay));
+    setTimeout(() => {
+      btn.textContent = '↺ Rejouer';
+      btn.classList.remove('playing');
+      btn.onclick = () => { window.speechSynthesis.cancel(); location.reload(); };
+    }, 15000);
+  }
+
+  if (window.speechSynthesis.getVoices().length > 0) {
+    demarrer();
+  } else {
+    window.speechSynthesis.onvoiceschanged = demarrer;
+  }
+}
+</script>
 </body>
 </html>
