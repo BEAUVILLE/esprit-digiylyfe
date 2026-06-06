@@ -1039,6 +1039,8 @@ function closeFab(){ fabOpen=false; document.getElementById('fabPanel')?.classLi
 document.addEventListener('click',e=>{ const wrap=document.getElementById('fabWrap'); if(wrap&&!wrap.contains(e.target)){ closeFab(); } });
 if(window.speechSynthesis){ window.speechSynthesis.getVoices(); if(window.speechSynthesis.onvoiceschanged!==undefined) window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices(); }
 </script>
+  
+<script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
 
