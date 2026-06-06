@@ -270,6 +270,29 @@ main.wrap,
   }
 }
 
+
+/* =========================================================
+   DIGIY — LECTEUR FLOTTANT À GAUCHE
+   Déplace uniquement le bouton ÉCOUTE / lecteur audio.
+   Le moteur audio, les images et le diaporama restent inchangés.
+   ========================================================= */
+.fab-wrap{
+  left:18px !important;
+  right:auto !important;
+  align-items:flex-start !important;
+}
+
+.fab-panel{
+  transform-origin:left bottom !important;
+}
+
+@media(max-width:700px){
+  .fab-wrap{
+    left:14px !important;
+    right:auto !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -676,7 +699,7 @@ document.addEventListener('visibilitychange',()=>{
     digiyKeepScreenAwake();
   }
 });
-const TEXT="DIGIYLYFE n'est pas une plateforme. C'est le terrain qui reprend son interface.
+const TEXT=`DIGIYLYFE n'est pas une plateforme. C'est le terrain qui reprend son interface.
 Il arrive un moment où un projet cesse d'être seulement un assemblage d'outils.
 
 Au départ, on peut croire que DIGIYLYFE est une application, un site, une vitrine, une marketplace, un logiciel de caisse, un système de réservation ou un espace professionnel.
@@ -802,7 +825,7 @@ Une route où le professionnel garde sa place, son argent, son client et sa dign
 
 DIGIYLYFE, c'est le terrain qui reprend son interface.
 
-Connecter sans confisquer. Le terrain garde la main.";
+Connecter sans confisquer. Le terrain garde la main.`;
 
 function digiySpeakText(text){
   /*
@@ -1043,6 +1066,17 @@ if(window.speechSynthesis){ window.speechSynthesis.getVoices(); if(window.speech
 <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
