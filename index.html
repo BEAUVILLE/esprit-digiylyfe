@@ -313,7 +313,7 @@ main.wrap,
 
 
 /* =========================================================
-   DIGIY — STABILITÉ + QR PARTAGEABLE
+   DIGIY — STABILITÉ + QR RÉSEAUX + FICHE PRO
    Diapos fixes : pas de zoom, pas de tremblement.
    QR à droite pour partager la page sans toucher au lecteur à gauche.
    ========================================================= */
@@ -633,6 +633,10 @@ main.wrap,
     <p class="hl">DIGIYLYFE ne remplace pas le professionnel. DIGIYLYFE lui donne des bras informatiques.</p>
     <p>Des bras pour être visible. Des bras pour répondre. Des bras pour encaisser directement. Des bras pour organiser son métier. Des bras pour garder son client, son nom, son argent et sa dignité.</p>
     <div class="rule"></div>
+    <p class="hl">Le QR DIGIY n’est pas un simple carré technique.<br>Il contient la fiche détaillée du professionnel.</p>
+    <p>Nom, métier, zone, photos, offres, contact direct, WhatsApp, appel, SMS : le QR devient la carte de visite vivante du pro. Il peut circuler sur WhatsApp, TikTok, YouTube, Facebook, dans une bio, une story, une vidéo, une affiche, une boutique, un véhicule, une carte papier et le site DIGIYLYFE.</p>
+    <p class="hl">Le QR fait circuler l’existence professionnelle, sans capter le client.</p>
+    <div class="rule"></div>
     <p class="hl">Devant : la fluidité.<br>La parole, le clic, le geste simple.<br>Derrière : la force tranquille du logiciel puissant.</p>
     <p>Le cerveau du module travaille dans le fond. Il prépare, range, structure, sécurise et éclaire. Le professionnel n’a pas besoin de voir toute la mécanique : il parle, il clique, il valide.</p>
     <p class="hl">Simple devant. Puissant derrière. Humain au centre.</p>
@@ -701,7 +705,7 @@ main.wrap,
 <div class="qr-wrap" id="qrWrap">
   <div class="qr-panel" id="qrPanel" aria-hidden="true">
     <div class="qr-title">QR partageable</div>
-    <div class="qr-text">Scanne ou partage cette page. Le lien reste direct : pas d’intermédiaire, pas de détour.</div>
+    <div class="qr-text">Le QR DIGIY est une carte de visite vivante : fiche détaillée du pro, contact direct, photos, offres, WhatsApp, appel, SMS. Il peut circuler sur TikTok, YouTube, WhatsApp, réseaux sociaux, affiches, véhicules, boutiques et site DIGIYLYFE.</div>
     <div class="qr-img-wrap">
       <img id="qrShareImg" alt="QR code de partage DIGIYLYFE" loading="lazy">
     </div>
@@ -931,6 +935,11 @@ Il garde son paiement.
 Il garde sa dignité.
 
 Le Q R ne détourne pas le client. Il l'amène vers le professionnel.
+Le Q R DIGIY n'est pas un simple carré technique. Il contient la fiche détaillée du professionnel : son nom, son métier, sa zone, ses photos, ses offres et ses contacts directs.
+
+Le pro peut le partager sur WhatsApp, TikTok, YouTube, Facebook, dans une story, dans une bio, dans une vidéo, sur une affiche, sur une carte, sur son véhicule, dans sa boutique et sur le site DIGIYLYFE.
+
+Le Q R fait circuler son existence professionnelle. Il ne capte pas le client. Il l'amène vers le pro.
 La vitrine ne remplace pas la boutique. Elle l'ouvre au monde.
 Le paiement ne passe pas par une caisse centrale. Il reste direct.
 Le logiciel métier ne transforme pas le pro en dépendant. Il lui ajoute des bras informatiques.
@@ -1264,7 +1273,7 @@ async function digiyNativeShare(){
   const url=digiyShareUrl();
   try{
     if(navigator.share){
-      await navigator.share({title:document.title||'DIGIYLYFE',text:'DIGIYLYFE · architecture digitale du terrain',url});
+      await navigator.share({title:document.title||'DIGIYLYFE',text:'DIGIYLYFE · architecture digitale du terrain · QR partageable pro',url});
     }else{
       await digiyCopyShareLink();
     }
@@ -1278,6 +1287,16 @@ window.addEventListener('load',digiyPrepareQr);
 <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 
